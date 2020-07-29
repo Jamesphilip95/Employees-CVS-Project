@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class CVSreader {
 
     public HashMap<String, Employee> getAllEmployees() {
-       return readEmployeesFromCVS("resources/employees");
+       return readEmployeesFromCVS("Employees/Resources/employees");
     }
     public static HashMap<String, Employee> readEmployeesFromCVS(String fileName) {
         HashMap<String, Employee> employees = new HashMap<>();

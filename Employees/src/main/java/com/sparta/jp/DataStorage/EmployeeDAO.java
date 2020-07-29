@@ -8,12 +8,12 @@ import java.util.HashMap;
 
 public class EmployeeDAO {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/employeerecords";
+    private static final String URL = "jdbc:mysql://localhost:3306/employeerecords?user=root&password=root&serverTimezone=UTC";
     private final String INSERT = "INSERT INTO employee_table VALUES (?,?,?,?,?,?,?,?,?,?)";
     Password password = new Password();
 
     public void addEmployees(HashMap<String, Employee> employeeList) {
-        try (Connection connection = DriverManager.getConnection(URL, "root",password.getPassword())) {
+        try (Connection connection = DriverManager.getConnection(URL)){
             PreparedStatement statement = connection.prepareStatement(INSERT);
             for (Employee employee : employeeList.values()) {
                 statement.setString(1, employee.getEmployeeId());
