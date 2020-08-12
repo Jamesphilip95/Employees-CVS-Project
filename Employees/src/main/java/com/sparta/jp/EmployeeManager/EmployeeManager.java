@@ -18,4 +18,8 @@ public class EmployeeManager {
         Long timeElapsed = end - start;
         System.out.println(timeElapsed);
     }
+    public void checkDataBase(){
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        employeeDAO.displayMinimumSalary(199900);
+    }
 }

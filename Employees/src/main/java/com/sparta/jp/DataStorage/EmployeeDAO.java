@@ -10,6 +10,7 @@ public class EmployeeDAO {
 
     private static final String URL = "jdbc:mysql://localhost:3306/employeerecords?user=root&password=root&serverTimezone=UTC";
     private final String INSERT = "INSERT INTO employee_table VALUES (?,?,?,?,?,?,?,?,?,?)";
+    private final String MINIMUM_SALARY = "SELECT employee_ID, title, firstName, lastName, salary FROM employee_table WHERE Salary > ?";
     Password password = new Password();
 
     public void addEmployees(HashMap<String, Employee> employeeList) {
@@ -28,6 +29,28 @@ public class EmployeeDAO {
                 statement.setString(10, employee.getSalary());
                 statement.executeUpdate();
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+            }
+
+            public void displayMinimumSalary(int Salary){
+        try(Connection connection = DriverManager.getConnection(URL)){
+            PreparedStatement statement = connection.prepareStatement(MINIMUM_SALARY);
+            statement.setInt(1, Salary);
+          try(ResultSet resultSet = statement.executeQuery()){
+              while(resultSet.next()){
+                  String title = resultSet.getString("title");
+                  String firstName = resultSet.getString("firstName");
+                  String secondName = resultSet.getString("lastName");
+                  String salary = resultSet.getString("salary");
+                  System.out.printf("Salary: £%s   %s %s %s %n",salary, title, firstName, secondName);;
+              }
+          }
+
+
+
 
         } catch (SQLException e) {
             e.printStackTrace();
