@@ -13,11 +13,13 @@ public class EmployeeManager {
         HashMap<String, Employee> employees = cvsReader.getAllEmployees();
         Long start = System.nanoTime();
         EmployeeDAO employeeDAO = new EmployeeDAO();
-        employeeDAO.addEmployees(employees);
+        int[] count = employeeDAO.addEmployeesWithBatch(employees);
         Long end = System.nanoTime();
         Long timeElapsed = end - start;
-        System.out.println(timeElapsed);
+        System.out.println(count.length + " Employees added");
+        System.out.println("Time Elapsed: " + timeElapsed/1000000000+"seconds");
     }
+
     public void checkDataBase(){
         EmployeeDAO employeeDAO = new EmployeeDAO();
         employeeDAO.displayMinimumSalary(199900);
