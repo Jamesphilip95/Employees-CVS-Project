@@ -8,11 +8,11 @@ import java.util.HashMap;
 
 
 public class EmployeeDAO {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/employeerecords?user=root&password=root&serverTimezone=UTC";
+    static Password password = new Password();
+    private static final String URL = "jdbc:mysql://localhost:3306/employeerecords?user=root&password="+password.getPassword()+"&serverTimezone=UTC";
     private final String INSERT = "INSERT INTO employee_table VALUES (?,?,?,?,?,?,?,?,?,?)";
     private final String MINIMUM_SALARY = "SELECT employee_ID, title, firstName, lastName, salary FROM employee_table WHERE Salary > ?";
-    Password password = new Password();
+
 
     public int addEmployees(HashMap<String, Employee> employeeList) {
         int count = 0;
@@ -67,18 +67,19 @@ public class EmployeeDAO {
         return count;
     }
 
-    public void displayMinimumSalary(int Salary) {
+    public void displayMinimumSalary(int minSalary) {
         try (Connection connection = DriverManager.getConnection(URL)) {
             PreparedStatement statement = connection.prepareStatement(MINIMUM_SALARY);
-            statement.setInt(1, Salary);
+            statement.setInt(1, minSalary);
             try (ResultSet resultSet = statement.executeQuery()) {
+                System.out.println("\nEmployee's with Salary over £" +minSalary +":");
+                System.out.println("------------------------------------");
                 while (resultSet.next()) {
                     String title = resultSet.getString("title");
                     String firstName = resultSet.getString("firstName");
                     String secondName = resultSet.getString("lastName");
                     String salary = resultSet.getString("salary");
                     System.out.printf("Salary: £%s   %s %s %s %n", salary, title, firstName, secondName);
-                    ;
                 }
             }
 
