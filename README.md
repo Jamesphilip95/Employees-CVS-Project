@@ -1,5 +1,11 @@
 # Employees-CVS-Project
 
-Written by James Philip on 20/03/2020
+Written by James Philip
 
-This project reads 10,000 employee records from a CVS file and creates subsequent employee objects. The objects were assigned their 10 corresponding attributes and stored in a hashmap. This data is then uploaded to a selfmade SQL database through a driver connection. The upload speed to the database was enhanced with use of threads.
+This project reads 10,000 employee records from a CVS file and uses JDBC to upload the records onto database using MySQL workbench.
+
+To use this project:
+  1. Create a database called "employeerecords" with a local instance on port 3306 on mySQL.
+  2. Create a table called employee_table on mySQL workbench with all the employee attributes.
+  
+This project found that usings batching, instead of executing an update for each insert, was considerably faster.
