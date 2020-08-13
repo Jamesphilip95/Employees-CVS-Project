@@ -1,9 +1,9 @@
 package com.sparta.jp.EmployeeModel;
 
 public class Password {
-    private String Password = "root";
+    private static String Password = "root";
 
-    public String getPassword() {
+    public static String getPassword() {
         return Password;
     }
 }
